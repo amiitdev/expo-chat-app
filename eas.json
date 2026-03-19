@@ -1,11 +1,41 @@
+// {
+//   "build": {
+//     "development": {
+//       "developmentClient": true,
+//       "distribution": "internal",
+//       "android": {
+//         "buildType": "apk"
+//       }
+//     }
+//   }
+// }
+
 {
+  "cli": {
+    "version": ">= 3.0.0",
+    "requireCommit": false,
+    "appVersionSource": "remote"
+  },
   "build": {
     "development": {
-      "developmentClient": true,
+      "developmentClient": false,
       "distribution": "internal",
       "android": {
         "buildType": "apk"
-      }
+      },
+      "node": "18.18.0"
+    },
+    "preview": {
+      "android": {
+        "buildType": "apk"
+      },
+      "node": "18.18.0"
+    },
+    "production": {
+      "android": {
+        "buildType": "apk"
+      },
+      "node": "18.18.0"
     }
   }
 }
