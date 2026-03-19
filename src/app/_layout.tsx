@@ -1,5 +1,6 @@
 import ChatWrapper from '@/components/ChatWrapper';
 import { AppProvider } from '@/contexts/AppProvider';
+// @ts-ignore
 import { ClerkProvider } from '@clerk/clerk-expo';
 // @ts-ignore
 import { tokenCache } from '@clerk/clerk-expo/token-cache';
