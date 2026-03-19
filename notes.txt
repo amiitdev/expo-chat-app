@@ -1,0 +1,232 @@
+══════════════════════════════════════════════════════════════
+                📱 MASTER APP FLOW (EXPO + CLERK AUTH)
+══════════════════════════════════════════════════════════════
+
+
+🚀 1️⃣ APP START FLOW
+──────────────────────────────────────────────────────────────
+
+APP START
+   │
+   ▼
+src/app/_layout.tsx
+(ClerkProvider wraps entire app)
+   │
+   ▼
+Expo Router loads routes
+   │
+   ▼
+src/app/index.tsx
+   │
+   ▼
+Redirect("/(auth)")
+   │
+   ▼
+(auth)/_layout.tsx
+   │
+   ▼
+Authentication Guard Runs
+
+
+
+🔐 2️⃣ AUTHENTICATION GUARD FLOW
+(File: src/app/(auth)/_layout.tsx)
+──────────────────────────────────────────────────────────────
+
+User enters (auth) route
+           │
+           ▼
+        useAuth()
+           │
+           ▼
+        isLoaded ?
+           │
+     ┌─────┴─────┐
+     │           │
+    NO          YES
+     │           │
+ return null     ▼
+  (wait)     isSignedIn ?
+                │
+          ┌─────┴─────┐
+          │           │
+         YES         NO
+          │           │
+ Redirect("/(home)")  Show Auth Screens
+                          │
+                          ▼
+                    AuthScreen Render
+
+
+
+📱 3️⃣ LOGIN FLOW (AuthScreen)
+(File: src/app/(auth)/index.tsx)
+──────────────────────────────────────────────────────────────
+
+AuthScreen Render
+      │
+      ▼
+User presses Google / Github
+      │
+      ▼
+handleSocialAuth(provider)
+      │
+      ▼
+startSSOFlow()  (Clerk OAuth)
+      │
+      ▼
+OAuth Provider Login
+(Google / Github)
+      │
+      ▼
+User Authorizes Login
+      │
+      ▼
+Clerk creates session
+      │
+      ▼
+isSignedIn = true
+      │
+      ▼
+(auth)/_layout.tsx detects login
+      │
+      ▼
+Redirect("/(home)")
+
+
+
+🏠 4️⃣ HOME SCREEN FLOW
+(File: src/app/(home)/index.tsx)
+──────────────────────────────────────────────────────────────
+
+User reaches Home Screen
+      │
+      ▼
+Home UI Render
+      │
+      ▼
+User presses Logout
+      │
+      ▼
+handleLogout()
+      │
+      ▼
+await signOut()
+      │
+      ▼
+Clerk removes session
+      │
+      ▼
+router.replace("/(auth)")
+      │
+      ▼
+Back to Auth Screen
+
+
+
+⚙️ 5️⃣ useAuth HOOK INTERNAL FLOW
+(File: src/hooks/useAuth.ts)
+──────────────────────────────────────────────────────────────
+
+User presses Login Button
+        │
+        ▼
+handleSocialAuth(strategy)
+        │
+        ▼
+Check loadingStrategy
+        │
+   ┌────┴─────┐
+   │          │
+Already     Not running
+loading       │
+   │          ▼
+Return     setLoadingStrategy(strategy)
+               │
+               ▼
+          startSSOFlow()
+               │
+               ▼
+      OAuth Provider Login
+               │
+               ▼
+     Clerk returns session data
+               │
+        ┌──────┴────────┐
+        │               │
+   Session missing   Session created
+        │               │
+        ▼               ▼
+   Show Alert      setActive(session)
+        │               │
+        ▼               ▼
+     finally()       User logged in
+        │               │
+        ▼               ▼
+loadingStrategy=null   Redirect to Home
+
+
+
+🔗 6️⃣ FULL CONNECTION FLOW (END-TO-END)
+──────────────────────────────────────────────────────────────
+
+APP START
+   │
+   ▼
+ClerkProvider
+   │
+   ▼
+Expo Router
+   │
+   ▼
+Redirect → /(auth)
+   │
+   ▼
+Auth Guard (_layout.tsx)
+   │
+   ▼
+AuthScreen
+   │
+   ▼
+useAuth()
+   │
+   ▼
+handleSocialAuth()
+   │
+   ▼
+Clerk OAuth Login
+   │
+   ▼
+Session Created
+   │
+   ▼
+isSignedIn = true
+   │
+   ▼
+(auth)/_layout.tsx detects login
+   │
+   ▼
+Redirect("/(home)")
+   │
+   ▼
+Home Screen
+   │
+   ▼
+Logout
+   │
+   ▼
+signOut()
+   │
+   ▼
+Redirect("/(auth)")
+
+
+
+══════════════════════════════════════════════════════════════
+               🔁 COMPLETE AUTH APP LIFECYCLE
+══════════════════════════════════════════════════════════════
+
+
+https://dashboard.getstream.io/app/1540569/chat/explorer
+
+3:50:37

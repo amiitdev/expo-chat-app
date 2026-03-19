@@ -1,0 +1,45 @@
+npm error code ERESOLVE
+npm error ERESOLVE could not resolve
+npm error
+npm error While resolving: @clerk/expo@3.0.1
+npm error Found: expo@55.0.4
+npm error node_modules/expo
+npm error   peer expo@"*" from @expo/dom-webview@55.0.3
+npm error   node_modules/@expo/dom-webview
+npm error     @expo/dom-webview@"^55.0.3" from @expo/log-box@55.0.7
+npm error     node_modules/@expo/log-box
+npm error       @expo/log-box@"55.0.7" from @expo/metro-runtime@55.0.6
+npm error       node_modules/@expo/metro-runtime
+npm error         peerOptional @expo/metro-runtime@"*" from expo@55.0.4
+npm error         2 more (expo-router, @expo/router-server)
+npm error       3 more (expo, expo-router, @expo/cli)
+npm error     peerOptional @expo/dom-webview@"*" from expo@55.0.4
+npm error   peer expo@"*" from @expo/log-box@55.0.7
+npm error   node_modules/@expo/log-box
+npm error     @expo/log-box@"55.0.7" from @expo/metro-runtime@55.0.6
+npm error     node_modules/@expo/metro-runtime
+npm error       peerOptional @expo/metro-runtime@"*" from expo@55.0.4
+npm error       2 more (expo-router, @expo/router-server)
+npm error     @expo/log-box@"55.0.7" from expo@55.0.4
+npm error     2 more (expo-router, @expo/cli)
+npm error   25 more (@expo/metro-config, @expo/metro-runtime, ...)
+npm error
+npm error Could not resolve dependency:
+npm error peer expo@">=53 <55" from @clerk/expo@3.0.1
+npm error node_modules/@clerk/expo
+npm error   @clerk/expo@"^3.0.1" from the root project
+npm error
+npm error Conflicting peer dependency: expo@54.0.33
+npm error node_modules/expo
+npm error   peer expo@">=53 <55" from @clerk/expo@3.0.1
+npm error   node_modules/@clerk/expo
+npm error     @clerk/expo@"^3.0.1" from the root project
+npm error
+npm error Fix the upstream dependency conflict, or retry
+npm error this command with --force or --legacy-peer-deps
+npm error to accept an incorrect (and potentially broken) dependency resolution.
+npm error
+npm error
+npm error For a full report see:
+npm error /home/amit/.npm/_logs/2026-03-05T15_34_31_862Z-eresolve-report.txt
+npm error A complete log of this run can be found in: /home/amit/.npm/_logs/2026-03-05T15_34_31_862Z-debug-0.log
